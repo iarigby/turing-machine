@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {State} from './classes/State';
 
 @Component({
   selector: 'app-root',
@@ -125,21 +126,7 @@ export class Tape {
     return str.substr(0, index) + chr + str.substr(index + 1);
   }
 }
-export class State {
-  name;
-  rules = [];
-  isAcceptState = false;
-  constructor(name) {
-    this.name = name;
-  }
-  toggleAccept() {
-    this.isAcceptState = !this.isAcceptState;
-  }
-  removeRule(rule) {
-    const n = this.rules.indexOf(rule);
-    this.rules.splice(n, n + 1);
-  }
-}
+
 
 export class Rule {
   read: string[];

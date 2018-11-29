@@ -1,0 +1,6 @@
+ng build --prod --base-href "https://iarigby.github.io/turing-machine/"
+mkdir -p docs
+cp dist/turing-machine/* docs/
+git add docs/*
+git commit
+git push

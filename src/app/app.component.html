@@ -14,26 +14,7 @@
     </div>
     <h3>States:</h3>
     <ul *ngFor="let state of turingMachine.states">
-      <div>
-        <div class="hasInlineButton" [ngClass]="{'acceptState': state.isAcceptState}">
-          <h3>{{state.name}} </h3>
-        </div>
-        <button (click)="state.toggleAccept()">toggle accept</button>
-      </div>
-      <div>
-        <h4>Rules:</h4>
-        <ul *ngFor="let rule of state.rules">
-          <div class="ruleList">
-            <div class="hasInlineButton" [ngClass]="{'usedrule': rule===turingMachine.rule}">
-              {{rule.read}} | {{rule.replace}},  {{rule.move}}
-              <span *ngIf="rule.nextState.name != state.name"> -> {{rule.nextState.name}}</span>
-            </div>
-            <button (click)="state.removeRule(rule)"> x </button>
-          </div>
-        </ul>
-      </div>
-      <div> add rule: <button (click)="showFormat = !showFormat">format for rules</button></div>
-
+      <app-state [state]="state" [currentRule]="turingMachine.rule"></app-state>
       <input #ruleInput (keyup.enter)="turingMachine.addRule(state, ruleInput.value); ruleInput.value=''"/>
     </ul>
     <div> add state: </div>

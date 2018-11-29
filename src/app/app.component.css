@@ -11,15 +11,9 @@
   margin: auto;
 }
 
-.usedrule, .acceptState {
-  background: darkseagreen;
-}
 button {
   display: inline;
   margin: auto;
-}
-.hasInlineButton {
-  float: left;
 }
 .ruleList {
   padding: 5px;
