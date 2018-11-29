@@ -1,0 +1,26 @@
+
+#setup {
+  margin: auto;
+  float: left;
+  overflow: hidden;
+  width: 40%;
+}
+
+#evaluation {
+  overflow: hidden;
+  margin: auto;
+}
+
+.usedrule, .acceptState {
+  background: darkseagreen;
+}
+button {
+  display: inline;
+  margin: auto;
+}
+.hasInlineButton {
+  float: left;
+}
+.ruleList {
+  padding: 5px;
+}

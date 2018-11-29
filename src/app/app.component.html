@@ -1,20 +1,56 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div id="turing-machine">
+  <div id="setup">
+    <h3>Terminals</h3>
+    <div *ngFor="let terminal of terminals">
+      <span>{{terminal}}, </span>
+      <button (click)="removeTerminal(terminal)">remove</button>
+    </div>
+    <input #terminalInput (keyup.enter)="addTerminal(terminalInput.value); terminalInput.value=''"/>
+    <ul></ul>
+    <h3>States:</h3>
+    <ul *ngFor="let state of turingMachine.states">
+      <div>
+        <div class="hasInlineButton" [ngClass]="{'acceptState': state.isAcceptState}">
+          <h3>{{state.name}} </h3>
+        </div>
+        <button (click)="state.toggleAccept()">toggle accept</button>
+      </div>
+      <div>
+        <h4>Rules:</h4>
+        <ul *ngFor="let rule of state.rules">
+          <div class="ruleList">
+            <div class="hasInlineButton" [ngClass]="{'usedrule': rule===turingMachine.rule}">{{rule.read}} | {{rule.replace}}, {{rule.move}}
+              <span *ngIf="rule.nextState.name != state.name"> -> {{rule.nextState.name}}</span>
+            </div>
+            <button (click)="state.removeRule(rule)">remove</button>
+          </div>
+        </ul>
+      </div>
+      <div> add rule: </div>
+      <input #ruleInput (keyup.enter)="turingMachine.addRule(state, ruleInput.value); ruleInput.value=''"/>
+    </ul>
+    <div> add state: </div>
+    <input #box (keyup.enter)="turingMachine.addState(box.value); box.value=''"/>
+  </div>
+  <div id="evaluation">
+    <div>inputstring:</div>
+    <input #inputString (keyup.enter)="turingMachine.inputTape.evaluationString = inputString.value; turingMachine.restart(); turingMachine.run()"/>
+    <div>
+      <div> state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}</div>
+      <div style="font-size: 2em;">
+        <span *ngFor="let char of turingMachine.inputTape.evaluationString.split('')">
+         {{char}}
+      </span>
+      </div>
+    </div>
+    <div>{{turingMachine.finalMessage}}</div>
+    <div style="margin-top: 100px; padding: 5px;">
+      <p>speed: {{turingMachine.timeoutTime / 1000}} seconds for 1 move </p>
+      <button (click)="turingMachine.increaseTime()">slower</button>
+      <button (click)="turingMachine.decreaseTime()">faster</button>
+    </div>
+    <div style="margin-top: 300px">add rules with this format (but without commas or spaces). If next state is omitted, it will be considered as loop</div>
+    <div>  character on tape, character to be replaced, which way to move (L or R)</div>
+    <div>example: abR -> read a, replace with b, move Right</div>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
