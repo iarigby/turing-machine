@@ -59,7 +59,14 @@ export class TuringMachine {
   }
   run() {
     this.rule = null;
-    this.rule = this.currentState.rules.find(x => x.read[0] === this.inputTape.getCurrentChar());
+    this.rule = this.currentState.rules.find(x => {
+      for (let i = 0; i < this.numTapes; i++) {
+        if (!(x.read[i] === this.tapes[i].getCurrentChar())) {
+          return false;
+        }
+      }
+      return true;
+    });
     console.log(this.inputTape.getCurrentChar());
     if (this.rule) {
       for (let i = 0; i < this.tapes.length; i++) {
@@ -71,9 +78,9 @@ export class TuringMachine {
       this.finalMessage = this.currentState.isAcceptState ? 'accepted' : 'rejected';
     }
   }
-  addRule(state, string) {
+  addRule(state, string: string) {
     const nextState = this.states.find(
-      x => x.name === string.substring(3 * this.numTapes, 5)) || state;
+      x => x.name === string.substr(3 * this.numTapes, 2)) || state;
     state.rules.push(new Rule(string, nextState, this.numTapes));
   }
   addState(stateName) {

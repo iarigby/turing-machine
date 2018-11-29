@@ -25,7 +25,7 @@
         <ul *ngFor="let rule of state.rules">
           <div class="ruleList">
             <div class="hasInlineButton" [ngClass]="{'usedrule': rule===turingMachine.rule}">
-              {{rule.read}} | {{rule.replace}},...  {{rule.move}}
+              {{rule.read}} | {{rule.replace}},  {{rule.move}}
               <span *ngIf="rule.nextState.name != state.name"> -> {{rule.nextState.name}}</span>
             </div>
             <button (click)="state.removeRule(rule)">remove</button>
