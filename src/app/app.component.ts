@@ -10,6 +10,7 @@ export class AppComponent {
   terminals = ['_'];
   turingMachine = new TuringMachine();
   showFormat = false;
+  timeoutTime = 500;
 
   addTerminal(terminal) {
     this.terminals.push(terminal);
@@ -17,6 +18,25 @@ export class AppComponent {
   removeTerminal(terminal) {
     const n = this.terminals.indexOf(terminal);
     this.terminals.splice(n, n + 1);
+  }
+  evaluate(string) {
+    this.turingMachine.restart();
+    this.turingMachine.inputTape.evaluationString = string;
+    setTimeout(() => this.run(), this.timeoutTime);
+  }
+  run() {
+    if (!this.turingMachine.finished) {
+      this.turingMachine.run();
+      setTimeout(() => this.run(), this.timeoutTime);
+    }
+  }
+  decreaseTime() {
+    if (this.timeoutTime > 110) {
+      this.timeoutTime -= 100;
+    }
+  }
+  increaseTime() {
+    this.timeoutTime += 100;
   }
 }
 
@@ -28,8 +48,10 @@ export class TuringMachine {
   states = [this.startState, new State('q1')];
   currentState = this.startState;
   finalMessage;
-  timeoutTime = 500;
   rule;
+  finished = false;
+  constructor() {
+  }
   increaseTapes() {
     this.numTapes += 1;
     this.tapes.push(new Tape());
@@ -40,19 +62,6 @@ export class TuringMachine {
       this.tapes.pop();
     }
   }
-  evaluate(string) {
-    this.restart();
-    this.inputTape.evaluationString = string;
-    setTimeout(() => this.run(), this.timeoutTime);
-  }
-  decreaseTime() {
-    if (this.timeoutTime > 110) {
-      this.timeoutTime -= 100;
-    }
-  }
-  increaseTime() {
-    this.timeoutTime += 100;
-  }
   restart() {
     this.currentState = this.startState;
     this.finalMessage = '';
@@ -60,21 +69,14 @@ export class TuringMachine {
   }
   run() {
     this.rule = null;
-    this.rule = this.currentState.rules.find(x => {
-      for (let i = 0; i < this.numTapes; i++) {
-        if (!(x.read[i] === this.tapes[i].getCurrentChar())) {
-          return false;
-        }
-      }
-      return true;
-    });
+    this.rule = this.findMatchingRule();
     if (this.rule) {
       for (let i = 0; i < this.tapes.length; i++) {
         this.tapes[i].processRule(this.rule, i);
       }
       this.currentState = this.rule.nextState;
-      setTimeout(() => this.run(), this.timeoutTime);
     } else {
+      this.finished = true;
       this.finalMessage = this.currentState.isAcceptState ? 'accepted' : 'rejected';
     }
   }
@@ -85,6 +87,16 @@ export class TuringMachine {
   }
   addState(stateName) {
     this.states.push(new State(stateName));
+  }
+  findMatchingRule() {
+    return this.currentState.rules.find(x => {
+      for (let i = 0; i < this.numTapes; i++) {
+        if (!(x.read[i] === this.tapes[i].getCurrentChar())) {
+          return false;
+        }
+      }
+      return true;
+    });
   }
 }
 

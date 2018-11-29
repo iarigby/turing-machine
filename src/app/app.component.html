@@ -29,7 +29,7 @@
   </div>
   <div id="evaluation">
     <div>inputstring:</div>
-    <input placeholder="type input string and press enter to evaluate" #inputString (keyup.enter)="turingMachine.evaluate(inputString.value)"/>
+    <input placeholder="type input string and press enter to evaluate" #inputString (keyup.enter)="evaluate(inputString.value)"/>
     <div>
       <div> state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}</div>
       <div *ngFor="let tape of turingMachine.tapes" style="font-size: 2em;">
@@ -41,9 +41,9 @@
     </div>
     <div>{{turingMachine.finalMessage}}</div>
     <div style="margin-top: 100px; padding: 5px;">
-      <p>speed: {{turingMachine.timeoutTime / 1000}} seconds for 1 move </p>
-      <button (click)="turingMachine.increaseTime()">slower</button>
-      <button (click)="turingMachine.decreaseTime()">faster</button>
+      <p>speed: {{timeoutTime / 1000}} seconds for 1 move </p>
+      <button (click)="increaseTime()">slower</button>
+      <button (click)="decreaseTime()">faster</button>
     </div>
   </div>
 </div>
