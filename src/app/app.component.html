@@ -19,7 +19,8 @@
         <h4>Rules:</h4>
         <ul *ngFor="let rule of state.rules">
           <div class="ruleList">
-            <div class="hasInlineButton" [ngClass]="{'usedrule': rule===turingMachine.rule}">{{rule.read}} | {{rule.replace}}, {{rule.move}}
+            <div class="hasInlineButton" [ngClass]="{'usedrule': rule===turingMachine.rule}">
+              {{rule.read}} | {{rule.replace}},...  {{rule.move}}
               <span *ngIf="rule.nextState.name != state.name"> -> {{rule.nextState.name}}</span>
             </div>
             <button (click)="state.removeRule(rule)">remove</button>
@@ -34,11 +35,12 @@
   </div>
   <div id="evaluation">
     <div>inputstring:</div>
-    <input #inputString (keyup.enter)="turingMachine.inputTape.evaluationString = inputString.value; turingMachine.restart(); turingMachine.run()"/>
+    <input title="type input string and press enter to evaluate" #inputString (keyup.enter)="turingMachine.evaluate(inputString.value)"/>
     <div>
       <div> state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}</div>
-      <div style="font-size: 2em;">
-        <span *ngFor="let char of turingMachine.inputTape.evaluationString.split('')">
+      <div *ngFor="let tape of turingMachine.tapes" style="font-size: 2em;">
+        <span style="font-size: 0.5em;"> tape {{turingMachine.tapes.indexOf(tape) + 1}} </span>
+        <span *ngFor="let char of tape.evaluationString.split('')">
          {{char}}
       </span>
       </div>

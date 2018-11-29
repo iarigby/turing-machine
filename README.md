@@ -1,3 +1,8 @@
+# TODO
+- [ ] add evaluation steps (write down like teacher)
+- [ ] add that _ is blank
+ 
+
 # TuringMachine
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
