@@ -67,7 +67,6 @@ export class TuringMachine {
       }
       return true;
     });
-    console.log(this.inputTape.getCurrentChar());
     if (this.rule) {
       for (let i = 0; i < this.tapes.length; i++) {
         this.tapes[i].processRule(this.rule, i);
@@ -103,13 +102,16 @@ export class Tape {
     return this.evaluationString[this.currentIndex];
   }
   moveRight() {
-    if (this.currentIndex === this.evaluationString.length - 1) {
+    const last = this.evaluationString.length;
+    const isLast = this.currentIndex === last;
+    const isbeforeLast = this.currentIndex === last - 1 && this.evaluationString[last] !== '_';
+    if (isLast || isbeforeLast) {
       this.evaluationString = this.evaluationString + '_';
     }
     this.currentIndex += 1;
   }
   moveLeft() {
-    if (this.currentIndex === 1) {
+    if (this.currentIndex === 0 || this.currentIndex === 1 && this.evaluationString[0] !== '_') {
       this.evaluationString = '_' + this.evaluationString;
     } else {
       this.currentIndex -= 1;

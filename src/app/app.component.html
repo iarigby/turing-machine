@@ -28,7 +28,7 @@
               {{rule.read}} | {{rule.replace}},  {{rule.move}}
               <span *ngIf="rule.nextState.name != state.name"> -> {{rule.nextState.name}}</span>
             </div>
-            <button (click)="state.removeRule(rule)">remove</button>
+            <button (click)="state.removeRule(rule)"> x </button>
           </div>
         </ul>
       </div>
