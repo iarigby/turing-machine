@@ -7,18 +7,9 @@ import {State} from './classes/State';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  terminals = ['_'];
   turingMachine = new TuringMachine();
   showFormat = false;
   timeoutTime = 500;
-
-  addTerminal(terminal) {
-    this.terminals.push(terminal);
-  }
-  removeTerminal(terminal) {
-    const n = this.terminals.indexOf(terminal);
-    this.terminals.splice(n, n + 1);
-  }
   evaluate(string) {
     this.turingMachine.restart();
     this.turingMachine.inputTape.evaluationString = string;
@@ -103,8 +94,11 @@ export class TuringMachine {
 export class Tape {
   evaluationString = '_';
   currentIndex = 0;
+  static setCharAt(str, index, chr) {
+    return str.substr(0, index) + chr + str.substr(index + 1);
+  }
   processRule(rule, i) {
-    this.evaluationString = this.setCharAt(this.evaluationString, this.currentIndex, rule.replace[i]);
+    this.evaluationString = Tape.setCharAt(this.evaluationString, this.currentIndex, rule.replace[i]);
     if (rule.move[i] === 'R') {
       this.moveRight();
     } else if (rule.move[i] === 'L') {
@@ -134,9 +128,6 @@ export class Tape {
     this.evaluationString = '_';
     this.currentIndex = 0;
   }
-  setCharAt(str, index, chr) {
-    return str.substr(0, index) + chr + str.substr(index + 1);
-  }
 }
 
 
@@ -151,8 +142,5 @@ export class Rule {
     this.move = s.substr(tapes * 2, tapes).split('');
     this.nextState = nextState;
   }
-  comprehend(string: string, ith, times): string[] {
-    return Array.from(Array(times / ith).keys())
-      .map((x, i) => string[i * ith + ith]);
-  }
 }
+

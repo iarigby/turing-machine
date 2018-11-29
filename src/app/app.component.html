@@ -1,12 +1,6 @@
 <div id="turing-machine">
   <div id="setup">
-    <h3>Terminals</h3>
-    <div *ngFor="let terminal of terminals">
-      <span>{{terminal}}, </span>
-      <button (click)="removeTerminal(terminal)">remove</button>
-    </div>
-    <input #terminalInput (keyup.enter)="addTerminal(terminalInput.value); terminalInput.value=''"/>
-    <ul></ul>
+    <h1>Turing Machine</h1>
     <div>
       <button (click)="turingMachine.decreaseTapes()">-</button>
       <h3 style="padding: 10px; display: inline">Tapes: {{turingMachine.numTapes}}</h3>
@@ -15,10 +9,10 @@
     <h3>States:</h3>
     <ul *ngFor="let state of turingMachine.states">
       <app-state [state]="state" [currentRule]="turingMachine.rule"></app-state>
-      <input #ruleInput (keyup.enter)="turingMachine.addRule(state, ruleInput.value); ruleInput.value=''"/>
+      <input #ruleInput (keyup.enter)="turingMachine.addRule(state, ruleInput.value); ruleInput.value=''" title="newRule"/>
     </ul>
     <div> add state: </div>
-    <input #box (keyup.enter)="turingMachine.addState(box.value); box.value=''"/>
+    <input #box (keyup.enter)="turingMachine.addState(box.value); box.value=''" title="newState"/>
     <div *ngIf="showFormat">add rules with this format (but without commas or spaces). If next state is omitted,
       it will be considered as loop
       <br/>
@@ -28,8 +22,8 @@
       second tape: read a, replace with _, move Left. use S for stay</div>
   </div>
   <div id="evaluation">
-    <div>inputstring:</div>
-    <input placeholder="type input string and press enter to evaluate" #inputString (keyup.enter)="evaluate(inputString.value)"/>
+    <div>input string:</div>
+    <input placeholder="press enter to evaluate" #inputString (keyup.enter)="evaluate(inputString.value)"/>
     <div>
       <div> state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}</div>
       <div *ngFor="let tape of turingMachine.tapes" style="font-size: 2em;">
