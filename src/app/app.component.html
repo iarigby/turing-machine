@@ -7,6 +7,11 @@
     </div>
     <input #terminalInput (keyup.enter)="addTerminal(terminalInput.value); terminalInput.value=''"/>
     <ul></ul>
+    <div>
+      <button (click)="turingMachine.decreaseTapes()">-</button>
+      <h3 style="padding: 10px; display: inline">Tapes: {{turingMachine.numTapes}}</h3>
+      <button (click)="turingMachine.increaseTapes()">+</button>
+    </div>
     <h3>States:</h3>
     <ul *ngFor="let state of turingMachine.states">
       <div>
@@ -27,15 +32,23 @@
           </div>
         </ul>
       </div>
-      <div> add rule: </div>
+      <div> add rule: <button (click)="showFormat = !showFormat">format for rules</button></div>
+
       <input #ruleInput (keyup.enter)="turingMachine.addRule(state, ruleInput.value); ruleInput.value=''"/>
     </ul>
     <div> add state: </div>
     <input #box (keyup.enter)="turingMachine.addState(box.value); box.value=''"/>
+    <div *ngIf="showFormat">add rules with this format (but without commas or spaces). If next state is omitted,
+      it will be considered as loop
+      <br/>
+      {{turingMachine.numTapes}} character<span *ngIf="turingMachine.numTapes > 1">s</span> on tape,
+      {{turingMachine.numTapes}} character<span *ngIf="turingMachine.numTapes > 1">s</span> to be replaced,
+      which way to move (L,R,S), also {{turingMachine.numTapes}} times. <br/> example: aab_RL -> first tape: read a, replace with b, move Right.
+      second tape: read a, replace with _, move Left. use S for stay</div>
   </div>
   <div id="evaluation">
     <div>inputstring:</div>
-    <input title="type input string and press enter to evaluate" #inputString (keyup.enter)="turingMachine.evaluate(inputString.value)"/>
+    <input placeholder="type input string and press enter to evaluate" #inputString (keyup.enter)="turingMachine.evaluate(inputString.value)"/>
     <div>
       <div> state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}</div>
       <div *ngFor="let tape of turingMachine.tapes" style="font-size: 2em;">
@@ -51,8 +64,5 @@
       <button (click)="turingMachine.increaseTime()">slower</button>
       <button (click)="turingMachine.decreaseTime()">faster</button>
     </div>
-    <div style="margin-top: 300px">add rules with this format (but without commas or spaces). If next state is omitted, it will be considered as loop</div>
-    <div>  character on tape, character to be replaced, which way to move (L or R)</div>
-    <div>example: abR -> read a, replace with b, move Right</div>
   </div>
 </div>

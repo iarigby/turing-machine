@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   terminals = ['_'];
   turingMachine = new TuringMachine();
+  showFormat = false;
 
   addTerminal(terminal) {
     this.terminals.push(terminal);
@@ -20,14 +21,24 @@ export class AppComponent {
 
 export class TuringMachine {
   inputTape = new Tape();
-  numTapes = 3;
-  tapes = [this.inputTape, new Tape(), new Tape()];
+  numTapes = 1;
+  tapes = [this.inputTape];
   startState = new State('q0');
   states = [this.startState, new State('q1')];
   currentState = this.startState;
   finalMessage;
   timeoutTime = 500;
   rule;
+  increaseTapes() {
+    this.numTapes += 1;
+    this.tapes.push(new Tape());
+  }
+  decreaseTapes() {
+    if (this.numTapes > 0) {
+      this.numTapes -= 1;
+      this.tapes.pop();
+    }
+  }
   evaluate(string) {
     this.restart();
     this.inputTape.evaluationString = string;
