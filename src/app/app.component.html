@@ -35,11 +35,12 @@
     <div id="add-rule">
       <div id="new-rule">
         <select title="startState" [(ngModel)]="startState">
-          <option *ngFor="let state of turingMachine.states">{{state.name}}</option>
+          <option *ngFor="let state of turingMachine.states" [ngValue]="state">{{state.name}}</option>
         </select>
-        <input title="newRule" class="input" #newRule (keyup.enter)="addNewRule(newRule.value)" [ngClass]="{'is-error': errorMessage}"/>
+        <input title="newRule" class="input" #newRule (keyup.enter)="addNewRule(newRule.value)"
+               [ngClass]="{'is-error': errorMessage}"/>
         <select title="endState" [(ngModel)]="endState">
-          <option *ngFor="let state of turingMachine.states">{{state.name}}</option>
+          <option *ngFor="let state of turingMachine.states" [ngValue]="state">{{state.name}}</option>
         </select>
         <button class="btn" (click)="addNewRule(newRule.value)">Add</button>
       </div>
