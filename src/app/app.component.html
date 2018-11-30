@@ -54,9 +54,9 @@
         </p>
       </div>
     </div>
-    <h3>Rules:</h3>
-    <input #box (keyup.enter)="turingMachine.addState(box.value); box.value=''" title="newState"/>
-    <button class="btn" (click)="turingMachine.addState(box.value)">Add new</button>
+    <h3>States:</h3>
+    <input placeholder="type new state" #box (keyup.enter)="turingMachine.addState(box.value); box.value=''" title="newState"/>
+    <button class="btn" (click)="turingMachine.addState(box.value)">Add</button>
     <ul *ngFor="let state of turingMachine.states">
       <!--TODO these should be one on mobile and just flexbox on desktop (with max wdth)-->
       <app-state [state]="state" [currentRule]="turingMachine.rule">{{state.name}}</app-state>
