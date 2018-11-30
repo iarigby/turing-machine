@@ -17,4 +17,11 @@ export class State {
     const n = this.rules.indexOf(rule);
     this.rules.splice(n, n + 1);
   }
+  findMatchingRule(readSymbols) {
+    return this.rules.find(x => {
+      return x.read
+        .map((symbol, index) => symbol === readSymbols[index])
+        .reduce((a, b) => a && b);
+    });
+  }
 }

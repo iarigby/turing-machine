@@ -71,7 +71,9 @@ export class TuringMachine {
   }
   run() {
     this.rule = null;
-    this.rule = this.findMatchingRule();
+    this.rule = this.currentState.findMatchingRule(
+      this.tapes.map(tape => tape.evaluationString[tape.currentIndex])
+    );
     if (this.rule) {
       for (let i = 0; i < this.tapes.length; i++) {
         this.tapes[i].processRule(this.rule, i);
@@ -84,16 +86,6 @@ export class TuringMachine {
   }
   addState(stateName) {
     this.states.push(new State(stateName));
-  }
-  findMatchingRule() {
-    return this.currentState.rules.find(x => {
-      for (let i = 0; i < this.numTapes; i++) {
-        if (!(x.read[i] === this.tapes[i].getCurrentChar())) {
-          return false;
-        }
-      }
-      return true;
-    });
   }
 }
 
