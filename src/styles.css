@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-.hasInlineButton {
-  float: left;
+.title {
+  font-size: 3em;
 }
+

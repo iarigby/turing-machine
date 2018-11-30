@@ -7,9 +7,21 @@ import {State} from './classes/State';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  turingMachine = new TuringMachine();
+  turingMachine = new TuringMachine(1);
   showFormat = false;
   timeoutTime = 500;
+  timeOffset = 100;
+  numTapes = 1;
+  startState: State;
+  endState: State;
+  errorMessage;
+  addNewRule(rule) {
+    if (rule.length === this.turingMachine.numTapes * 3) {
+      this.startState.addRule(rule, this.endState);
+    } else {
+      this.errorMessage = true;
+    }
+  }
   evaluate(string) {
     this.turingMachine.restart();
     this.turingMachine.inputTape.evaluationString = string;
@@ -21,36 +33,34 @@ export class AppComponent {
       setTimeout(() => this.run(), this.timeoutTime);
     }
   }
-  decreaseTime() {
-    if (this.timeoutTime > 110) {
-      this.timeoutTime -= 100;
+  changeTime(n) {
+    if (this.timeoutTime + n > this.timeOffset) {
+      this.timeoutTime += n * this.timeOffset;
     }
   }
-  increaseTime() {
-    this.timeoutTime += 100;
+  changeTapes(n) {
+    if (this.numTapes + n >= 1) {
+      this.numTapes += n;
+      this.turingMachine = new TuringMachine(this.numTapes);
+    }
   }
 }
 
 export class TuringMachine {
   inputTape = new Tape();
-  numTapes = 1;
-  tapes = [this.inputTape];
+  numTapes: number;
+  tapes: Tape[];
   startState = new State('q0');
   states = [this.startState, new State('q1')];
   currentState = this.startState;
   finalMessage;
-  rule;
+  rule: Rule;
   finished = false;
-  constructor() {
-  }
-  increaseTapes() {
-    this.numTapes += 1;
-    this.tapes.push(new Tape());
-  }
-  decreaseTapes() {
-    if (this.numTapes > 0) {
-      this.numTapes -= 1;
-      this.tapes.pop();
+  constructor(n: number) {
+    this.numTapes = n;
+    this.tapes = [this.inputTape];
+    for (let i = 1; i < n; i++ ) {
+      this.tapes.push(new Tape());
     }
   }
   restart() {
@@ -70,11 +80,6 @@ export class TuringMachine {
       this.finished = true;
       this.finalMessage = this.currentState.isAcceptState ? 'accepted' : 'rejected';
     }
-  }
-  addRule(state, string: string) {
-    const nextState = this.states.find(
-      x => x.name === string.substr(3 * this.numTapes, 2)) || state;
-    state.rules.push(new Rule(string, nextState, this.numTapes));
   }
   addState(stateName) {
     this.states.push(new State(stateName));
@@ -108,6 +113,7 @@ export class Tape {
   getCurrentChar() {
     return this.evaluationString[this.currentIndex];
   }
+  // BOO bad functions
   moveRight() {
     const last = this.evaluationString.length;
     const isLast = this.currentIndex === last;
@@ -136,10 +142,11 @@ export class Rule {
   replace: string[];
   move: string[];
   nextState: State;
-  constructor(s, nextState, tapes) {
-    this.read = s.substr(0, tapes).split('');
-    this.replace = s.substr(tapes, tapes).split('');
-    this.move = s.substr(tapes * 2, tapes).split('');
+  constructor(s: String, nextState: State) {
+    const numTapes = s.length / 3;
+    this.read = s.substr(0, numTapes).split('');
+    this.replace = s.substr(numTapes, numTapes).split('');
+    this.move = s.substr(numTapes * 2, numTapes).split('');
     this.nextState = nextState;
   }
 }

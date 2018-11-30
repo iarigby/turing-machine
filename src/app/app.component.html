@@ -1,19 +1,55 @@
-<div id="turing-machine">
-  <div id="setup">
-    <h1 style="text-align : center; ">Turing Machine</h1>
+<!--TODO add input class to inputs-->
+<!--TODO add button next to input string that does the same as pressing enter, icon should be snes logo-->
+
+<div id="turing-machine" class="container with-title">
+  <h1 class="title">Turing Machine</h1>
+  <div>
     <div>
-      <div><button (click)="turingMachine.decreaseTapes()" class="button-1">-</button></div>
-      <h3 style="padding: 10px; display: inline;">Tapes: {{turingMachine.numTapes}}</h3>
-      <button (click)="turingMachine.increaseTapes()"class = "button-2">+</button>
+      <button class="btn" (click)="changeTapes(-1)">-</button>
+      <h3 style="padding: 10px; display: inline">Tapes: {{turingMachine.numTapes}}</h3>
+      <button class="btn" (click)="changeTapes(1)">+</button>
     </div>
-    <h3>States:</h3>
-    <ul *ngFor="let state of turingMachine.states">
-      <app-state [state]="state" [currentRule]="turingMachine.rule"></app-state>
-      <input #ruleInput (keyup.enter)="turingMachine.addRule(state, ruleInput.value); ruleInput.value=''" title="newRule"/>
-    </ul>
-    <div> add state: </div>
+    <div id="evaluation">
+      <div>input string:</div>
+      <input placeholder="press enter to evaluate" #inputString (keyup.enter)="evaluate(inputString.value)"/>
+      <div>
+        <div> state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}</div>
+        <div *ngFor="let tape of turingMachine.tapes" style="font-size: 2em;">
+          <span style="font-size: 0.5em;"> tape {{turingMachine.tapes.indexOf(tape) + 1}} </span>
+          <span *ngFor="let char of tape.evaluationString.split('')">
+         {{char}}
+        </span>
+        </div>
+      </div>
+      <div>{{turingMachine.finalMessage}}</div>
+      <!--TODO make this like tapes, and put them next to each other
+      on mobile it will be down-->
+      <div style="margin-top: 100px; padding: 5px;">
+        <h3>Speed: {{timeoutTime / 1000}} </h3>
+        <button class="btn" (click)="changeTime(1)">slower</button>
+        <button class="btn" (click)="changeTime(-1)">faster</button>
+      </div>
+    </div>
+    <h3 style="display: inline">Add New Rule</h3>
+    <div style="display: inline"><button class="btn" (click)="showFormat = !showFormat">format for rules</button></div>
+    <div id="newRule">
+      <select title="startState" [(ngModel)]="startState">
+        <option *ngFor="let state of turingMachine.states">{{state.name}}</option>
+      </select>
+      <input title="newRule" #newRule (keyup.enter)="addNewRule(newRule.value)"/>
+      <select title="endState" [(ngModel)]="endState">
+        <option *ngFor="let state of turingMachine.states">{{state.name}}</option>
+      </select>
+      <button class="btn" (click)="addNewRule(newRule.value)">Add</button>
+    </div>
+    <h3>Rules:</h3>
     <input #box (keyup.enter)="turingMachine.addState(box.value); box.value=''" title="newState"/>
-    <div class = "" *ngIf="showFormat">add rules with this format (but without commas or spaces). If next state is omitted,
+    <button class="btn" (click)="turingMachine.addState(box.value)">Add new</button>
+    <ul *ngFor="let state of turingMachine.states">
+      <!--TODO these should be one on mobile and just flexbox on desktop (with max wdth)-->
+      <app-state [state]="state" [currentRule]="turingMachine.rule">{{state.name}}</app-state>
+    </ul>
+    <div *ngIf="showFormat">add rules with this format (but without commas or spaces). If next state is omitted,
       it will be considered as loop
       <br/>
       {{turingMachine.numTapes}} character<span *ngIf="turingMachine.numTapes > 1">s</span> on tape,
@@ -21,23 +57,5 @@
       which way to move (L,R,S), also {{turingMachine.numTapes}} times. <br/> example: aab_RL -> first tape: read a, replace with b, move Right.
       second tape: read a, replace with _, move Left. use S for stay</div>
   </div>
-  <div id="evaluation">
-    <div>input string:</div>
-    <input placeholder="press enter to evaluate" #inputString (keyup.enter)="evaluate(inputString.value)"/>
-    <div>
-      <div> state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}</div>
-      <div *ngFor="let tape of turingMachine.tapes" style="font-size: 2em;">
-        <span style="font-size: 0.5em;"> tape {{turingMachine.tapes.indexOf(tape) + 1}} </span>
-        <span *ngFor="let char of tape.evaluationString.split('')">
-         {{char}}
-      </span>
-      </div>
-    </div>
-    <div>{{turingMachine.finalMessage}}</div>
-    <div style="margin-top: 100px; padding: 5px;">
-      <p>speed: {{timeoutTime / 1000}} seconds for 1 move </p>
-      <button (click)="increaseTime()">slower</button>
-      <button (click)="decreaseTime()">faster</button>
-    </div>
-  </div>
+
 </div>
