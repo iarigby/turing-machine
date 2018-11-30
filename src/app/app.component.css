@@ -1,5 +1,35 @@
-
+#turing-machine {
+  width: 100% ;
+  float: center;
+}
 #setup {
+  margin: auto;
+  position: centre;
+}
+
+#taps {
+  width: 400px;
+  position: centre;
+}
+beside-right {
+  float : right;
+  width: 50%;
+  position: centre;
+}
+.beside-left{
+  float: left;
+  width: 50%;
+  position: centre;
+}
+ .middle {
+   background: red;
+ }
+/*#taps {
+  margin: auto;
+  width: 500px;
+  background-color: red;
+}*/
+/*#setup {
   margin: auto;
   float: left;
   overflow: hidden;
@@ -18,3 +48,4 @@ button {
 .ruleList {
   padding: 5px;
 }
+*/

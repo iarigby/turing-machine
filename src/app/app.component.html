@@ -1,10 +1,10 @@
 <div id="turing-machine">
   <div id="setup">
-    <h1>Turing Machine</h1>
+    <h1 style="text-align : center; ">Turing Machine</h1>
     <div>
-      <button (click)="turingMachine.decreaseTapes()">-</button>
-      <h3 style="padding: 10px; display: inline">Tapes: {{turingMachine.numTapes}}</h3>
-      <button (click)="turingMachine.increaseTapes()">+</button>
+      <div><button (click)="turingMachine.decreaseTapes()" class="button-1">-</button></div>
+      <h3 style="padding: 10px; display: inline;">Tapes: {{turingMachine.numTapes}}</h3>
+      <button (click)="turingMachine.increaseTapes()"class = "button-2">+</button>
     </div>
     <h3>States:</h3>
     <ul *ngFor="let state of turingMachine.states">
@@ -13,7 +13,7 @@
     </ul>
     <div> add state: </div>
     <input #box (keyup.enter)="turingMachine.addState(box.value); box.value=''" title="newState"/>
-    <div *ngIf="showFormat">add rules with this format (but without commas or spaces). If next state is omitted,
+    <div class = "" *ngIf="showFormat">add rules with this format (but without commas or spaces). If next state is omitted,
       it will be considered as loop
       <br/>
       {{turingMachine.numTapes}} character<span *ngIf="turingMachine.numTapes > 1">s</span> on tape,
