@@ -1,17 +1,17 @@
-<!--TODO add input class to inputs-->
+<!--TODO add input class to inputs  ok-->
 <!--TODO add button next to input string that does the same as pressing enter, icon should be snes logo-->
 
 <div id="turing-machine" class="container with-title">
-  <h1 class="title">Turing Machine</h1>
+  <h1 class="title" style="font-size : 130%">Turing Machine</h1>
   <div>
-    <div>
+    <div style="margin : 10px;">
       <button class="btn" (click)="changeTapes(-1)">-</button>
       <h3 style="padding: 10px; display: inline">Tapes: {{turingMachine.numTapes}}</h3>
       <button class="btn" (click)="changeTapes(1)">+</button>
     </div>
     <div id="evaluation">
       <div>input string:</div>
-      <input placeholder="press enter to evaluate" #inputString (keyup.enter)="evaluate(inputString.value)"/>
+      <input class = "input" placeholder="press enter to evaluate" #inputString (keyup.enter)="evaluate(inputString.value)"/>
       <div>
         <div> state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}</div>
         <div *ngFor="let tape of turingMachine.tapes" style="font-size: 2em;">
@@ -33,17 +33,17 @@
     <h3 style="display: inline">Add New Rule</h3>
     <div style="display: inline"><button class="btn" (click)="showFormat = !showFormat">format for rules</button></div>
     <div id="newRule">
-      <select title="startState" [(ngModel)]="startState">
+      <select class = "input" title="startState" [(ngModel)]="startState">
         <option *ngFor="let state of turingMachine.states">{{state.name}}</option>
       </select>
-      <input title="newRule" #newRule (keyup.enter)="addNewRule(newRule.value)"/>
-      <select title="endState" [(ngModel)]="endState">
+      <input class = "input" title="newRule" #newRule (keyup.enter)="addNewRule(newRule.value)"/>
+      <select class = "input" title="endState" [(ngModel)]="endState">
         <option *ngFor="let state of turingMachine.states">{{state.name}}</option>
       </select>
       <button class="btn" (click)="addNewRule(newRule.value)">Add</button>
     </div>
     <h3>Rules:</h3>
-    <input #box (keyup.enter)="turingMachine.addState(box.value); box.value=''" title="newState"/>
+    <input class = "input" #box (keyup.enter)="turingMachine.addState(box.value); box.value=''" title="newState"/>
     <button class="btn" (click)="turingMachine.addState(box.value)">Add new</button>
     <ul *ngFor="let state of turingMachine.states">
       <!--TODO these should be one on mobile and just flexbox on desktop (with max wdth)-->

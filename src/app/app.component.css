@@ -1,13 +1,52 @@
 #turing-machine {
+  width: 100% ;
+  float: center;
+}
+#setup {
   margin: auto;
-  position: relative;
-  width: 1000px;
+  position: centre;
 }
 
-
-
-@media only screen and (max-width: 375px) {
-  #turing-machine {
-    width: 90%;
-  }
+#taps {
+  width: 400px;
+  position: centre;
 }
+beside-right {
+  float : right;
+  width: 50%;
+  position: centre;
+}
+.beside-left{
+  float: left;
+  width: 50%;
+  position: centre;
+}
+ .input {
+  margin : 10px;
+ }
+
+/*#taps {
+  margin: auto;
+  width: 500px;
+  background-color: red;
+}*/
+/*#setup {
+  margin: auto;
+  float: left;
+  overflow: hidden;
+  width: 40%;
+}
+
+#evaluation {
+  overflow: hidden;
+  margin: auto;
+}
+
+button {
+  display: inline;
+  margin: auto;
+}
+.ruleList {
+  padding: 5px;
+}
+*/
