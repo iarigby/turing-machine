@@ -1,10 +1,10 @@
 <div id="turing-machine">
-  <div id="setup">
+  <div>
     <h1>Turing Machine</h1>
     <div>
-      <button (click)="turingMachine.decreaseTapes()">-</button>
+      <button (click)="changeTapes(-1)">-</button>
       <h3 style="padding: 10px; display: inline">Tapes: {{turingMachine.numTapes}}</h3>
-      <button (click)="turingMachine.increaseTapes()">+</button>
+      <button (click)="changeTapes(1)">+</button>
     </div>
     <h3>States:</h3>
     <ul *ngFor="let state of turingMachine.states">
@@ -30,14 +30,14 @@
         <span style="font-size: 0.5em;"> tape {{turingMachine.tapes.indexOf(tape) + 1}} </span>
         <span *ngFor="let char of tape.evaluationString.split('')">
          {{char}}
-      </span>
+        </span>
       </div>
     </div>
     <div>{{turingMachine.finalMessage}}</div>
     <div style="margin-top: 100px; padding: 5px;">
       <p>speed: {{timeoutTime / 1000}} seconds for 1 move </p>
-      <button (click)="increaseTime()">slower</button>
-      <button (click)="decreaseTime()">faster</button>
+      <button (click)="changeTime(-1)">slower</button>
+      <button (click)="changeTime(1)">faster</button>
     </div>
   </div>
 </div>

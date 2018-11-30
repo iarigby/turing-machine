@@ -7,9 +7,11 @@ import {State} from './classes/State';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  turingMachine = new TuringMachine();
+  turingMachine = new TuringMachine(1);
   showFormat = false;
   timeoutTime = 500;
+  timeOffset = 100;
+  numTapes = 1;
   evaluate(string) {
     this.turingMachine.restart();
     this.turingMachine.inputTape.evaluationString = string;
@@ -21,36 +23,34 @@ export class AppComponent {
       setTimeout(() => this.run(), this.timeoutTime);
     }
   }
-  decreaseTime() {
-    if (this.timeoutTime > 110) {
-      this.timeoutTime -= 100;
+  changeTime(n) {
+    if (this.timeoutTime + n > this.timeOffset) {
+      this.timeoutTime += n * this.timeOffset;
     }
   }
-  increaseTime() {
-    this.timeoutTime += 100;
+  changeTapes(n) {
+    if (this.numTapes + n >= 1) {
+      this.numTapes += n;
+      this.turingMachine = new TuringMachine(this.numTapes);
+    }
   }
 }
 
 export class TuringMachine {
   inputTape = new Tape();
-  numTapes = 1;
-  tapes = [this.inputTape];
+  numTapes: number;
+  tapes: Tape[];
   startState = new State('q0');
   states = [this.startState, new State('q1')];
   currentState = this.startState;
   finalMessage;
-  rule;
+  rule: Rule;
   finished = false;
-  constructor() {
-  }
-  increaseTapes() {
-    this.numTapes += 1;
-    this.tapes.push(new Tape());
-  }
-  decreaseTapes() {
-    if (this.numTapes > 0) {
-      this.numTapes -= 1;
-      this.tapes.pop();
+  constructor(n: number) {
+    this.numTapes = n;
+    this.tapes = [this.inputTape];
+    for (let i = 1; i < n; i++ ) {
+      this.tapes.push(new Tape());
     }
   }
   restart() {
@@ -108,6 +108,7 @@ export class Tape {
   getCurrentChar() {
     return this.evaluationString[this.currentIndex];
   }
+  // BOO bad functions
   moveRight() {
     const last = this.evaluationString.length;
     const isLast = this.currentIndex === last;
