@@ -12,11 +12,12 @@ export class AppComponent {
   timeoutTime = 500;
   timeOffset = 100;
   numTapes = 1;
-  startState: State;
-  endState: State;
-  errorMessage;
+  startState: State = this.turingMachine.startState;
+  endState: State = this.turingMachine.startState;
+  errorMessage = false;
   addNewRule(rule) {
     if (rule.length === this.turingMachine.numTapes * 3) {
+      this.errorMessage = false;
       this.startState.addRule(rule, this.endState);
     } else {
       this.errorMessage = true;

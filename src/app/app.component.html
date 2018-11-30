@@ -1,6 +1,5 @@
 <!--TODO add input class to inputs-->
 <!--TODO add button next to input string that does the same as pressing enter, icon should be snes logo-->
-
 <div id="turing-machine" class="container with-title">
   <h1 class="title">Turing Machine</h1>
   <div>
@@ -31,16 +30,29 @@
       </div>
     </div>
     <h3 style="display: inline">Add New Rule</h3>
-    <div style="display: inline"><button class="btn" (click)="showFormat = !showFormat">format for rules</button></div>
-    <div id="newRule">
-      <select title="startState" [(ngModel)]="startState">
-        <option *ngFor="let state of turingMachine.states">{{state.name}}</option>
-      </select>
-      <input title="newRule" #newRule (keyup.enter)="addNewRule(newRule.value)"/>
-      <select title="endState" [(ngModel)]="endState">
-        <option *ngFor="let state of turingMachine.states">{{state.name}}</option>
-      </select>
-      <button class="btn" (click)="addNewRule(newRule.value)">Add</button>
+    <!--TODO align this right-->
+    <div style="display: inline"><button class="btn" (click)="errorMessage = !errorMessage">format</button></div>
+    <div id="add-rule">
+      <div id="new-rule">
+        <select title="startState" [(ngModel)]="startState">
+          <option *ngFor="let state of turingMachine.states">{{state.name}}</option>
+        </select>
+        <input title="newRule" class="input" #newRule (keyup.enter)="addNewRule(newRule.value)" [ngClass]="{'is-error': errorMessage}"/>
+        <select title="endState" [(ngModel)]="endState">
+          <option *ngFor="let state of turingMachine.states">{{state.name}}</option>
+        </select>
+        <button class="btn" (click)="addNewRule(newRule.value)">Add</button>
+      </div>
+      <div id="rule-error" *ngIf="errorMessage">
+        <!--TODO needs to be smaller and lighter color (not full black, greyish)-->
+        <p>
+          You need to have {{turingMachine.numTapes}} letters for read, {{turingMachine.numTapes}}
+          for replace, and then move direction for each tape.
+        </p>
+        <p>
+          Turing machine can move Left (L), right (R) or Stay (S)
+        </p>
+      </div>
     </div>
     <h3>Rules:</h3>
     <input #box (keyup.enter)="turingMachine.addState(box.value); box.value=''" title="newState"/>
@@ -49,13 +61,6 @@
       <!--TODO these should be one on mobile and just flexbox on desktop (with max wdth)-->
       <app-state [state]="state" [currentRule]="turingMachine.rule">{{state.name}}</app-state>
     </ul>
-    <div *ngIf="showFormat">add rules with this format (but without commas or spaces). If next state is omitted,
-      it will be considered as loop
-      <br/>
-      {{turingMachine.numTapes}} character<span *ngIf="turingMachine.numTapes > 1">s</span> on tape,
-      {{turingMachine.numTapes}} character<span *ngIf="turingMachine.numTapes > 1">s</span> to be replaced,
-      which way to move (L,R,S), also {{turingMachine.numTapes}} times. <br/> example: aab_RL -> first tape: read a, replace with b, move Right.
-      second tape: read a, replace with _, move Left. use S for stay</div>
   </div>
 
 </div>
