@@ -12,6 +12,7 @@
     <div id="evaluation">
       <div>input string:</div>
       <input class = "input" placeholder="press enter to evaluate" #inputString (keyup.enter)="evaluate(inputString.value)"/>
+      <i class="nes-logo"></i>
       <div>
         <div> state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}</div>
         <div class = "container is-white" *ngFor="let tape of turingMachine.tapes" style="font-size: 2em;">
@@ -23,7 +24,7 @@
       </div>
       <div>{{turingMachine.finalMessage}}</div>
       <!--TODO make this like tapes, and put them next to each other
-      on mobile it will be down-->
+      on mobile it will be down ok-->
       <div style="margin-top: 100px; padding: 5px;">
         <h3>Speed: {{timeoutTime / 1000}} </h3>
         <button class="btn" (click)="changeTime(1)">slower</button>
@@ -47,7 +48,7 @@
     <button class="btn" (click)="turingMachine.addState(box.value)">Add new</button>
     <div class="margin">
     <ul class="container is-dark" *ngFor="let state of turingMachine.states">
-      <!--TODO these should be one on mobile and just flexbox on desktop (with max wdth)-->
+      <!--TODO these should be one on mobile and just flexbox on desktop (with max wdth) ok -->
       <app-state [state]="state" [currentRule]="turingMachine.rule">{{state.name}}</app-state>
     </ul>
   </div>  

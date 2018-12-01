@@ -39,9 +39,22 @@ beside-right {
 }
 @media only screen and (max-width: 667px)  {
 .input {
-  width: 99%;
+  width: 80%;
+}
+.nes-logo {
+  position: relative;
+  display: inline-block;
+  width: 20%;
+  height: 27px;
 }
 }
+.nes-logo {
+  position: relative;
+  display: inline-block;
+  width: 0px;
+  height: 27px;
+}
+
 /*#taps {
   margin: auto;
   width: 500px;
