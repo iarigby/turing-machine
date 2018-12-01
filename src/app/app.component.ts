@@ -68,6 +68,7 @@ export class TuringMachine {
     this.currentState = this.startState;
     this.finalMessage = '';
     this.tapes.forEach(tape => tape.reset());
+    this.finished = false;
   }
   run() {
     this.rule = null;
@@ -81,6 +82,7 @@ export class TuringMachine {
       this.currentState = this.rule.nextState;
     } else {
       this.finished = true;
+      // TODO this needs to be handled differently (html as well)
       this.finalMessage = this.currentState.isAcceptState ? 'accepted' : 'rejected';
     }
   }
