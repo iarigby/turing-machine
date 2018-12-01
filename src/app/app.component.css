@@ -25,6 +25,23 @@ beside-right {
   margin : 10px;
  }
 
+ .is-dark  {
+   color : white;
+   display: inline-block;
+   margin-left: 3px;
+ }
+ .is-white  {
+  display: inline-block;
+  margin-left: 3px;
+}
+.margin {
+  margin-top: 15px;
+}
+@media only screen and (max-width: 667px)  {
+.input {
+  width: 99%;
+}
+}
 /*#taps {
   margin: auto;
   width: 500px;

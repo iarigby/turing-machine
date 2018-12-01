@@ -14,9 +14,9 @@
       <input class = "input" placeholder="press enter to evaluate" #inputString (keyup.enter)="evaluate(inputString.value)"/>
       <div>
         <div> state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}</div>
-        <div *ngFor="let tape of turingMachine.tapes" style="font-size: 2em;">
-          <span style="font-size: 0.5em;"> tape {{turingMachine.tapes.indexOf(tape) + 1}} </span>
-          <span *ngFor="let char of tape.evaluationString.split('')">
+        <div class = "container is-white" *ngFor="let tape of turingMachine.tapes" style="font-size: 2em;">
+          <span  style="font-size: 0.7em;"> tape {{turingMachine.tapes.indexOf(tape) + 1}} </span>
+          <span  *ngFor="let char of tape.evaluationString.split('')">
          {{char}}
         </span>
         </div>
@@ -45,10 +45,12 @@
     <h3>Rules:</h3>
     <input class = "input" #box (keyup.enter)="turingMachine.addState(box.value); box.value=''" title="newState"/>
     <button class="btn" (click)="turingMachine.addState(box.value)">Add new</button>
-    <ul *ngFor="let state of turingMachine.states">
+    <div class="margin">
+    <ul class="container is-dark" *ngFor="let state of turingMachine.states">
       <!--TODO these should be one on mobile and just flexbox on desktop (with max wdth)-->
       <app-state [state]="state" [currentRule]="turingMachine.rule">{{state.name}}</app-state>
     </ul>
+  </div>  
     <div *ngIf="showFormat">add rules with this format (but without commas or spaces). If next state is omitted,
       it will be considered as loop
       <br/>
@@ -57,5 +59,4 @@
       which way to move (L,R,S), also {{turingMachine.numTapes}} times. <br/> example: aab_RL -> first tape: read a, replace with b, move Right.
       second tape: read a, replace with _, move Left. use S for stay</div>
   </div>
-
 </div>
