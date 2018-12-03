@@ -12,9 +12,8 @@
         <div [ngClass]="{'used-rule': rule===currentRule}">
           {{rule.read}} | {{rule.replace}},  {{rule.move}}
           <span *ngIf="rule.nextState.name != state.name"> -> {{rule.nextState.name}}</span>
+          <button class="btn" (click)="state.removeRule(rule)"> x </button>
         </div>
-        <!--TODO move this button next to the rule-->
-        <button class="btn" (click)="state.removeRule(rule)"> x </button>
       </div>
     </ul>
   </div>
