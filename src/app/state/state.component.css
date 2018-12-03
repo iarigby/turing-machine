@@ -1,3 +1,21 @@
 .used-rule, .accept-state {
   background: darkseagreen;
 }
+
+
+
+.is-dark  {
+  color : white;
+  display: inline-block;
+  margin-left: 3px;
+} 
+
+@media only screen and (max-width: 667px)  {
+
+  .is-dark  {
+    color : white;
+    display: inline-block;
+    margin-top: 5px;
+  }
+
+}

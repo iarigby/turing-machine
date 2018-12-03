@@ -1,5 +1,5 @@
 <!--TODO [ia] add button next to input string that does the same as pressing enter, icon should be snes logo-->
-<!-- TODO  mobile: 95%, desktop: 60%-->
+<!-- TODO  mobile: 95%, desktop: 60% done boss-->
 <div id="turing-machine" class="container with-title">
   <h1 class="title" style="font-size : 130%">Turing Machine</h1>
   <div>
@@ -8,16 +8,19 @@
       <div>input string:</div>
       <input class = "input" placeholder="press enter to evaluate" #inputString (keyup.enter)="evaluate(inputString.value)"/>
       <i class="nes-logo"></i>
-      <div>
-        <div> state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}</div>
-        <div style="margin : 10px;">
+      <div></div>
+      <div class = "container with-title margin smaller">
+        <div class ="title">
           <button class="btn" (click)="changeTapes(-1)">-</button>
-          <h3 style="padding: 10px; display: inline">Tapes: {{turingMachine.numTapes}}</h3>
+          <h3 class="tape">Tapes: {{turingMachine.numTapes}}</h3>
           <button class="btn" (click)="changeTapes(1)">+</button>
         </div>
-        <div class = "container is-white" *ngFor="let tape of turingMachine.tapes" style="font-size: 2em;">
-          <!--TODO these should be in one box all of them, vertically, tape number changing should be the title-->
-          <span  style="font-size: 0.7em;"> tape {{turingMachine.tapes.indexOf(tape) + 1}} </span>
+        <div class = "state"> state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}</div>
+        <div style="margin : 10px;">
+        </div>
+        <div  *ngFor="let tape of turingMachine.tapes" class="number_of_tabe">
+          <!--TODO these should be in one box all of them, vertically, tape number changing should be the title done boss-->
+          <span > tape {{turingMachine.tapes.indexOf(tape) + 1}} </span>
           <span  *ngFor="let char of tape.evaluationString.split('')">
          {{char}}
         </span>
@@ -64,7 +67,7 @@
     <input class="input" placeholder="type new state" #box (keyup.enter)="turingMachine.addState(box.value); box.value=''" title="newState"/>
     <button class="btn" (click)="turingMachine.addState(box.value)">Add</button>
     <div class="margin"></div>
-    <ul class="container is-dark" *ngFor="let state of turingMachine.states">
+    <ul style = "display: inline-block; margin: 0; margin-left: -32px;" *ngFor="let state of turingMachine.states">
       <!--TODO these should be one on mobile and just flexbox on desktop (with max wdth)-->
       <app-state [state]="state" [currentRule]="turingMachine.rule">{{state.name}}</app-state>
     </ul>

@@ -1,5 +1,6 @@
 #turing-machine {
-  width: 100% ;
+  width: 60%;
+  margin:auto;
   float: center;
 }
 #setup {
@@ -31,14 +32,25 @@ beside-right {
    margin-left: 3px;
  }
  .is-white  {
-  display: inline-block;
   margin-left: 3px;
 }
 .margin {
   margin-top: 15px;
 }
+.tape{
+  padding: 10px;
+   display: inline;
+}
+.number_of_tabe {
+  font-size: 2em;
+}
 @media only screen and (max-width: 667px)  {
-.input {
+  #turing-machine {
+    width: 97%;
+    margin:auto;
+    float: center;
+  }
+  .input {
   width: 80%;
 }
 .nes-logo {
@@ -47,6 +59,39 @@ beside-right {
   width: 20%;
   height: 27px;
 }
+.container.with-title > .title {
+
+  font-size: 0.7rem;
+
+}
+.btn {
+
+  position: relative;
+  display: inline-block;
+  padding: 5px 6px;
+  margin: 4px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #212529;
+  background-color: #fff;
+  box-shadow: inset -4px -4px #adafbc;
+
+}
+.tape{
+  padding: 1em;
+  display: inline;
+}
+.number_of_tabe {
+  font-size: 1em;
+}
+.smaller {
+  height:150px;
+}
 }
 .nes-logo {
   position: relative;
@@ -54,6 +99,12 @@ beside-right {
   width: 0px;
   height: 27px;
 }
+
+.state {
+  margin-left:340px;;
+}
+
+
 
 /*#taps {
   margin: auto;
