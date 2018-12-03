@@ -43,6 +43,8 @@ export class AppComponent {
     if (this.numTapes + n >= 1) {
       this.numTapes += n;
       this.turingMachine = new TuringMachine(this.numTapes);
+      this.startState = this.turingMachine.startState;
+      this.endState = this.turingMachine.startState;
     }
   }
 }

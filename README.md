@@ -1,7 +1,8 @@
 # TODO
 - [ ] add evaluation steps (write down like teacher)
 - [ ] add that _ is blank
- 
+- [ ] icon for run
+- [ ] icon for transition arrow
 
 # TuringMachine
 
