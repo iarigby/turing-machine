@@ -23,7 +23,7 @@
   position: center;
 }
 .input {
-margin : 10px;
+  margin : 10px;
 }
 
 .is-dark  {
@@ -45,13 +45,16 @@ margin : 10px;
   margin-top: 10px;
   font-size: 1.3em;
 }
+#tapes {
+  margin-top: 20px;
+}
 @media only screen and (max-width: 667px)  {
   #turing-machine {
     width: 97%;
     margin:auto;
   }
-  .input {
-    width: 80%;
+  input .input {
+    width: 70%;
   }
   .nes-logo {
     position: relative;
@@ -64,12 +67,16 @@ margin : 10px;
   }
   .btn {
     padding: 5px 6px;
+    margin: 0;
   }
   .num-tapes{
     padding: 1em;
     display: inline;
   }
   .state {
+    font-size: 1em;
+  }
+  .tape {
     font-size: 1em;
   }
 }
@@ -94,4 +101,16 @@ margin : 10px;
   padding: 0;
   width: 30px;
   height: 24px;
+}
+
+#new-rule-header button {
+  display: inline;
+}
+#new-rule-header h3 {
+  display: inline;
+}
+
+#rule-error p {
+  font-size: 0.8em;
+  color: #333333;
 }

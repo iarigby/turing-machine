@@ -1,13 +1,10 @@
 <div class="container is-dark with-title">
-  <!--TODO add container with title in line, state name in title-->
-  <!--TODO maybe icon for arrow in rules, instead of -> -->
-  <div class="title" [ngClass]="{'accept-state': state.isAcceptState}" >
+  <div class="title" [ngClass]="{'accept-state': state.isAcceptState}">
     <h3>{{state.name}} </h3>
   </div>
   <label>
-    <!--TODO @ia move this somewhere else-->
-  <input type="checkbox" class="checkbox" (change)="state.toggleAccept()">
-  <span>accept state</span>
+    <input type="checkbox" class="checkbox" (change)="state.toggleAccept()">
+    <span>accept state</span>
   </label>
   <div>
     <ul *ngFor="let rule of state.rules">

@@ -1,5 +1,5 @@
-.used-rule, .accept-state {
-  background: darkseagreen;
+.used-rule {
+  color: mediumseagreen;
 }
 
 .is-dark  {
@@ -7,6 +7,10 @@
   display: inline-block;
   margin-left: 3px;
 } 
+
+.accept-state h3 {
+  color: mediumseagreen;
+}
 
 @media only screen and (max-width: 667px)  {
 
