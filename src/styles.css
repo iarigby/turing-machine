@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+#made-by {
+  display: flex;
+  width: 600px;
+  font-size: 0.8em;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.github-link {
+  display: flex;
+  height: 100px;
+  color: #333;
+  text-decoration: none;
+}
+.github-link:hover {
+  text-decoration: none;
+}
+.github-link > p.balloon {
+  align-self: flex-start;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  color: #333;
+}
+.github-link > i.octocat {
+  align-self: flex-end;
+}
