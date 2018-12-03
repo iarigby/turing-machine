@@ -63,11 +63,13 @@
       </div>
     </div>
     <h3>States:</h3>
-    <input class="input" placeholder="type new state" #box (keyup.enter)="turingMachine.addState(box.value); box.value=''" title="newState"/>
-    <button class="btn" (click)="turingMachine.addState(box.value)">Add</button>
     <div class="margin"></div>
     <ul style = "display: inline-block; padding:10px; margin: 0;" *ngFor="let state of turingMachine.states">
       <app-state [state]="state" [currentRule]="turingMachine.rule">{{state.name}}</app-state>
     </ul>
+    <div>
+      <input class="input" placeholder="type new state" #box (keyup.enter)="turingMachine.addState(box.value); box.value=''" title="newState"/>
+      <button class="btn" (click)="turingMachine.addState(box.value)">Add</button>
+    </div>
   </div>
 </div>
