@@ -5,8 +5,7 @@
     <div id="evaluation">
       <div>input string:</div>
       <input class = "input" placeholder="press enter to evaluate" #inputString (keyup.enter)="evaluate(inputString.value)"/>
-      <i class="nes-logo"></i>
-      <div></div>
+        <button class="btn is-primary" (click)="evaluate(inputString.value)">Run</button>
       <div class = "container with-title margin">
         <div class ="title">
           <button class="btn" (click)="changeTapes(-1)">-</button>
@@ -37,7 +36,9 @@
       <div>{{turingMachine.finalMessage}}</div>
     </div>
     <h3 style="display: inline">Add New Rule</h3>
-    <div style="display: inline"><button class="btn" (click)="errorMessage = !errorMessage">format</button></div>
+    <div style="display: inline">
+      <button class="btn" (click)="errorMessage = !errorMessage">format</button>
+    </div>
     <div id="add-rule">
       <div id="new-rule">
         <select class="input" title="startState" [(ngModel)]="startState">
@@ -62,7 +63,6 @@
       </div>
     </div>
     <h3>States:</h3>
-    <div class="margin"></div>
     <ul style = "display: inline-block; padding:10px; margin: 0;" *ngFor="let state of turingMachine.states">
       <app-state [state]="state" [currentRule]="turingMachine.rule">{{state.name}}</app-state>
     </ul>
