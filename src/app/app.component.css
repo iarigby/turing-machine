@@ -1,107 +1,86 @@
 #turing-machine {
   width: 60%;
   margin:auto;
-  float: center;
 }
 #setup {
   margin: auto;
-  position: centre;
+  position: center;
 }
 
 #taps {
   width: 400px;
-  position: centre;
+  position: center;
 }
-beside-right {
+
+.beside-right {
   float : right;
   width: 50%;
-  position: centre;
+  position: center;
 }
 .beside-left{
   float: left;
   width: 50%;
-  position: centre;
+  position: center;
 }
- .input {
-  margin : 10px;
- }
+.input {
+margin : 10px;
+}
 
- .is-dark  {
-   color : white;
-   display: inline-block;
-   margin-left: 3px;
- }
- .is-white  {
+.is-dark  {
+ color : white;
+ display: inline-block;
+ margin-left: 3px;
+}
+.is-white  {
   margin-left: 3px;
 }
 .margin {
   margin-top: 15px;
 }
-.tape{
+.num-tapes{
   padding: 10px;
-   display: inline;
+  display: inline;
 }
-.number_of_tabe {
-  font-size: 2em;
+.tape {
+  margin-top: 10px;
+  font-size: 1.3em;
 }
 @media only screen and (max-width: 667px)  {
   #turing-machine {
     width: 97%;
     margin:auto;
-    float: center;
   }
   .input {
-  width: 80%;
+    width: 80%;
+  }
+  .nes-logo {
+    position: relative;
+    display: inline-block;
+    width: 20%;
+    height: 27px;
+  }
+  .container.with-title > .title {
+    font-size: 0.7rem;
+  }
+  .btn {
+    padding: 5px 6px;
+  }
+  .num-tapes{
+    padding: 1em;
+    display: inline;
+  }
+  .state {
+    font-size: 1em;
+  }
 }
 .nes-logo {
   position: relative;
   display: inline-block;
-  width: 20%;
-  height: 27px;
-}
-.container.with-title > .title {
-
-  font-size: 0.7rem;
-
-}
-.btn {
-
-  position: relative;
-  display: inline-block;
-  padding: 5px 6px;
-  margin: 4px;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  color: #212529;
-  background-color: #fff;
-  box-shadow: inset -4px -4px #adafbc;
-
-}
-.tape{
-  padding: 1em;
-  display: inline;
-}
-.number_of_tabe {
-  font-size: 1em;
-}
-.smaller {
-  height:150px;
-}
-}
-.nes-logo {
-  position: relative;
-  display: inline-block;
-  width: 0px;
+  width: 0;
   height: 27px;
 }
 
 .state {
-  margin-left:340px;;
 }
 
 
