@@ -1,22 +1,22 @@
 <div>
   <!--TODO add container with title in line, state name in title-->
   <!--TODO maybe icon for arrow in rules, instead of -> -->
-  <div class="hasInlineButton" [ngClass]="{'acceptState': state.isAcceptState}">
+  <div [ngClass]="{'accept-state': state.isAcceptState}">
     <h3>{{state.name}} </h3>
   </div>
   <label>
   <input type="checkbox" class="checkbox" (change)="state.toggleAccept()">
   <span>accept state</span>
-    <!--TODO this should -->
   </label>
 </div>
 <div>
   <ul *ngFor="let rule of state.rules">
-    <div class="ruleList">
-      <div class="hasInlineButton" [ngClass]="{'usedRule': rule===currentRule}">
+    <div>
+      <div [ngClass]="{'used-rule': rule===currentRule}">
         {{rule.read}} | {{rule.replace}},  {{rule.move}}
         <span *ngIf="rule.nextState.name != state.name"> -> {{rule.nextState.name}}</span>
       </div>
+      <!--TODO move this button next to the rule-->
       <button class="btn" (click)="state.removeRule(rule)"> x </button>
     </div>
   </ul>

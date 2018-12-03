@@ -12,11 +12,12 @@ export class AppComponent {
   timeoutTime = 500;
   timeOffset = 100;
   numTapes = 1;
-  startState: State;
-  endState: State;
-  errorMessage;
+  startState: State = this.turingMachine.startState;
+  endState: State = this.turingMachine.startState;
+  errorMessage = false;
   addNewRule(rule) {
     if (rule.length === this.turingMachine.numTapes * 3) {
+      this.errorMessage = false;
       this.startState.addRule(rule, this.endState);
     } else {
       this.errorMessage = true;
@@ -67,10 +68,13 @@ export class TuringMachine {
     this.currentState = this.startState;
     this.finalMessage = '';
     this.tapes.forEach(tape => tape.reset());
+    this.finished = false;
   }
   run() {
     this.rule = null;
-    this.rule = this.findMatchingRule();
+    this.rule = this.currentState.findMatchingRule(
+      this.tapes.map(tape => tape.evaluationString[tape.currentIndex])
+    );
     if (this.rule) {
       for (let i = 0; i < this.tapes.length; i++) {
         this.tapes[i].processRule(this.rule, i);
@@ -78,21 +82,12 @@ export class TuringMachine {
       this.currentState = this.rule.nextState;
     } else {
       this.finished = true;
+      // TODO this needs to be handled differently (html as well)
       this.finalMessage = this.currentState.isAcceptState ? 'accepted' : 'rejected';
     }
   }
   addState(stateName) {
     this.states.push(new State(stateName));
-  }
-  findMatchingRule() {
-    return this.currentState.rules.find(x => {
-      for (let i = 0; i < this.numTapes; i++) {
-        if (!(x.read[i] === this.tapes[i].getCurrentChar())) {
-          return false;
-        }
-      }
-      return true;
-    });
   }
 }
 
