@@ -24,18 +24,17 @@
         </div>
       </div>
       <div class = "state">
-        state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}
+        <div>
+          state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}
+        </div>
+        <div id="speed-control">
+          <button class="btn" (click)="changeTime(-1)">-</button>
+          <div>{{timeoutTime / 1000}} seconds/move</div>
+          <button class="btn" (click)="changeTime(1)">+</button>
+        </div>
       </div>
       <!--TODO find a visual way to communicate to user if it was accepted or not-->
       <div>{{turingMachine.finalMessage}}</div>
-      <!--TODO make this like tapes, and put them next to each other
-      on mobile it will be down ok-->
-      <div style="margin-top: 100px; padding: 5px;">
-        <!--TODO @ia change this to something undersandable-->
-        <h3>Speed: {{timeoutTime / 1000}} </h3>
-        <button class="btn" (click)="changeTime(1)">slower</button>
-        <button class="btn" (click)="changeTime(-1)">faster</button>
-      </div>
     </div>
     <h3 style="display: inline">Add New Rule</h3>
     <div style="display: inline"><button class="btn" (click)="errorMessage = !errorMessage">format</button></div>
