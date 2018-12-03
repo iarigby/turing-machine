@@ -1,20 +1,22 @@
-<!--TODO add input class to inputs  ok-->
-<!--TODO add button next to input string that does the same as pressing enter, icon should be snes logo-->
+<!--TODO [ia] add button next to input string that does the same as pressing enter, icon should be snes logo-->
+<!-- TODO  mobile: 95%, desktop: 60%-->
 <div id="turing-machine" class="container with-title">
   <h1 class="title" style="font-size : 130%">Turing Machine</h1>
   <div>
-    <div style="margin : 10px;">
-      <button class="btn" (click)="changeTapes(-1)">-</button>
-      <h3 style="padding: 10px; display: inline">Tapes: {{turingMachine.numTapes}}</h3>
-      <button class="btn" (click)="changeTapes(1)">+</button>
-    </div>
+
     <div id="evaluation">
       <div>input string:</div>
       <input class = "input" placeholder="press enter to evaluate" #inputString (keyup.enter)="evaluate(inputString.value)"/>
       <i class="nes-logo"></i>
       <div>
         <div> state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}</div>
+        <div style="margin : 10px;">
+          <button class="btn" (click)="changeTapes(-1)">-</button>
+          <h3 style="padding: 10px; display: inline">Tapes: {{turingMachine.numTapes}}</h3>
+          <button class="btn" (click)="changeTapes(1)">+</button>
+        </div>
         <div class = "container is-white" *ngFor="let tape of turingMachine.tapes" style="font-size: 2em;">
+          <!--TODO these should be in one box all of them, vertically, tape number changing should be the title-->
           <span  style="font-size: 0.7em;"> tape {{turingMachine.tapes.indexOf(tape) + 1}} </span>
           <span  *ngFor="let char of tape.evaluationString.split('')">
          {{char}}
@@ -26,6 +28,7 @@
       <!--TODO make this like tapes, and put them next to each other
       on mobile it will be down ok-->
       <div style="margin-top: 100px; padding: 5px;">
+        <!--TODO @ia change this to something undersandable-->
         <h3>Speed: {{timeoutTime / 1000}} </h3>
         <button class="btn" (click)="changeTime(1)">slower</button>
         <button class="btn" (click)="changeTime(-1)">faster</button>
@@ -58,7 +61,7 @@
       </div>
     </div>
     <h3>States:</h3>
-    <input placeholder="type new state" #box (keyup.enter)="turingMachine.addState(box.value); box.value=''" title="newState"/>
+    <input class="input" placeholder="type new state" #box (keyup.enter)="turingMachine.addState(box.value); box.value=''" title="newState"/>
     <button class="btn" (click)="turingMachine.addState(box.value)">Add</button>
     <div class="margin"></div>
     <ul class="container is-dark" *ngFor="let state of turingMachine.states">
@@ -67,3 +70,4 @@
     </ul>
   </div>
 </div>
+<!--TODO @ia add gh-->
