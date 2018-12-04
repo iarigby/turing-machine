@@ -8,6 +8,9 @@
   margin-left: 3px;
 } 
 
+label span {
+  font-size: 0.8em;
+}
 .accept-state h3 {
   color: mediumseagreen;
 }

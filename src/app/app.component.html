@@ -2,8 +2,7 @@
   <h1 class="title" style="font-size : 130%">Turing Machine</h1>
   <div>
     <div id="evaluation">
-      <div>input string:</div>
-      <input class = "input" placeholder="press enter to evaluate" #inputString (keyup.enter)="evaluate(inputString.value)"/>
+      <input class = "input" placeholder="type input string" #inputString (keyup.enter)="evaluate(inputString.value)"/>
         <button class="btn is-primary" (click)="evaluate(inputString.value)">Run</button>
       <div class = "container with-title margin">
         <div class ="title">
@@ -21,7 +20,8 @@
         </div>
       </div>
       <div class = "state">
-        <div>
+        <!--TODO Hossam pls make this one line on desktop and two on mobile-->
+        <div id="current-state">
           state: {{turingMachine.currentState.name}} index: {{turingMachine.inputTape.currentIndex}}
         </div>
         <div id="speed-control">
@@ -32,7 +32,7 @@
       </div>
       <!--TODO find a visual way to communicate to user if it was accepted or not-->
       <div>{{turingMachine.finalMessage}}</div>
-    </div>
+                                                  </div>
     <div id="new-rule-header">
       <h3>Add New Rule</h3>
       <button class="btn" (click)="errorMessage = !errorMessage">format</button>
