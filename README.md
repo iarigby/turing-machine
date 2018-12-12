@@ -1,3 +1,9 @@
+# Cleanup
+
+- [ ] turing machine change link for see source
+- [ ] readme file
+- [ ] transfer todos from code
+
 # TODO
 - [ ] add evaluation steps (write down like teacher)
 - [ ] add that _ is blank
